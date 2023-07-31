@@ -1,0 +1,15 @@
+def moveZeroes(nums):
+    n = len(nums)
+    non_zero_ptr = 0
+    zero_ptr = 0
+
+    while non_zero_ptr < n:
+        if nums[non_zero_ptr] != 0:
+            nums[non_zero_ptr], nums[zero_ptr] = nums[zero_ptr], nums[non_zero_ptr]
+            zero_ptr += 1
+        non_zero_ptr += 1
+
+# Example usage:
+arr = [1, 2, 0, 4, 3, 0, 5, 0]
+moveZeroes(arr)
+print(arr)  # Output: [1, 2, 4, 3, 5, 0, 0, 0]

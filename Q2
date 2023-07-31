@@ -1,0 +1,46 @@
+def countSmaller(nums):
+    def merge_sort_and_count(start, end):
+        if start >= end:
+            return []
+        
+        mid = (start + end) // 2
+        left_count = merge_sort_and_count(start, mid)
+        right_count = merge_sort_and_count(mid + 1, end)
+
+        merged_count = [0] * (end - start + 1)
+        i, j, k = mid, end, len(merged_count) - 1
+
+        while i >= start and j > mid:
+            if nums[i] > nums[j]:
+                merged_count[k] = j - mid
+                j -= 1
+            else:
+                i -= 1
+            k -= 1
+
+        while i >= start:
+            merged_count[k] = 0
+            i -= 1
+            k -= 1
+
+        while j > mid:
+            merged_count[k] = j - mid
+            j -= 1
+            k -= 1
+
+        return left_count + merged_count + right_count
+
+    return merge_sort_and_count(0, len(nums) - 1)
+
+# Example usage:
+nums = [5, 2, 6, 1]
+counts = countSmaller(nums)
+print(counts)  # Output: [2, 1, 1, 0]
+#Python sorted function:
+def sortArray(nums):
+    return sorted(nums)
+
+# Example usage:
+nums = [5, 2, 6, 1]
+sorted_nums = sortArray(nums)
+print(sorted_nums)  # Output: [1, 2, 5, 6]

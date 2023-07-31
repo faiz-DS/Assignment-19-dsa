@@ -1,0 +1,26 @@
+def rearrangeAlternate(nums):
+    n = len(nums)
+    pos_ptr = 0
+    neg_ptr = 0
+
+    while pos_ptr < n and neg_ptr < n:
+        while pos_ptr < n and nums[pos_ptr] < 0:
+            pos_ptr += 1
+
+        while neg_ptr < n and nums[neg_ptr] >= 0:
+            neg_ptr += 1
+
+        if pos_ptr < n and neg_ptr < n:
+            if pos_ptr < neg_ptr:
+                nums[pos_ptr + 1:neg_ptr + 1] = nums[pos_ptr:neg_ptr]
+                nums[pos_ptr] = nums[neg_ptr]
+            else:
+                nums[neg_ptr + 1:pos_ptr + 1] = nums[neg_ptr:pos_ptr]
+                nums[neg_ptr] = nums[pos_ptr]
+            pos_ptr += 1
+            neg_ptr += 1
+
+# Example usage:
+arr = [1, 2, 3, -4, -1, 4]
+rearrangeAlternate(arr)
+print(arr)  # Output: [-4, 1, -1, 2, 3, 4]

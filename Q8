@@ -1,0 +1,26 @@
+def intersect(nums1, nums2):
+    from collections import defaultdict
+    
+    freq_map1 = defaultdict(int)
+    freq_map2 = defaultdict(int)
+
+    for num in nums1:
+        freq_map1[num] += 1
+
+    for num in nums2:
+        freq_map2[num] += 1
+
+    intersection = []
+
+    for num in freq_map1:
+        if num in freq_map2:
+            min_freq = min(freq_map1[num], freq_map2[num])
+            intersection.extend([num] * min_freq)
+
+    return intersection
+
+# Example usage:
+nums1 = [1, 2, 2, 1]
+nums2 = [2, 2]
+result = intersect(nums1, nums2)
+print(result)  # Output: [2, 2]
